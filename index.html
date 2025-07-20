@@ -54,31 +54,13 @@
       color: gray;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .reviews {
-      background-color: #111;
-      border: 2px dotted #f0f;
-      padding: 15px;
-      margin-top: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .reviews p {
-      margin-bottom: 10px;
-    }
-
-    input[type="file"] {
-      margin-top: 15px;
-    }
-
     @keyframes flicker {
       0%, 100% {opacity: 1;}
       50% {opacity: 0.3;}
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -91,38 +73,20 @@
 
   <hr>
 
-  <h2>🧨 Защищённый файл отчёта</h2>
+  <h2>🯨 Защищённый файл отчёта</h2>
   <button class="download-btn" onclick="handleDownloadClick()">🔐 Скачать UltraMegaAntivirus-ru-9000</button>
   <p>Кликов до открытия: <span id="clickCounter">20</span></p>
-  <a id="downloadLink" class="hidden" href="UltraMegaAntivirus.exe" download>Скачать</a>
-
-  <hr>
-
-  <h2>🗂️ Загрузить файл на проверку</h2>
-  <input type="file" onchange="checkUploadedFile(event)">
-  <p id="uploadResult" style="color:red; font-weight:bold;"></p>
+  <a id="downloadLink" class="hidden" href="UltraMegaAntivirus-ru-9000.exe" download>Скачать</a>
 
   <hr>
 
   <h2>🔥 MEEM Режим</h2>
-  <button class="meem-btn" onclick="activateMeemMode()">🎰 ВКЛЮЧИТЬ MEEM РЕЖИМ</button>
+  <button class="meem-btn" onclick="activateMeemMode()">🌰 ВКЛЮЧИТЬ MEEM РЕЖИМ</button>
   <div id="meemZone" class="hidden">
     <p style="font-size:2em; color: red;">💸 100% ВЫИГРЫШ В КАЗИНО! ЖМИ! 💸</p>
     <p style="font-size:1.5em; color: yellow;">🥇 Успей забрать подарок от UltraMegaCoin!</p>
-    <p style="font-size:1.2em; color: lime;">🎮 Геймер? Забери RTX4090, просто зарегистрируйся 999 раз!</p>
+    <p style="font-size:1.2em; color: lime;">🎮 Геймер? Забери RTX4090, просто регистрируйся 999 раз!</p>
   </div>
-
-  <hr>
-
-  <h2>🔑 Купить лицензионный ключ</h2>
-  <button class="virus-scan" onclick="generateKey()">💳 Купить ключ — 100 Hamster Coins</button>
-  <p id="keyDisplay" style="font-size:1.5em; color: #0f0;"></p>
-
-  <h2>🐹 Твой баланс Hamster Coins</h2>
-  <p style="font-size:1.5em; color: yellow;"><span id="coinCount">500</span> 🐹</p>
-  <button class="virus-scan" onclick="earnCoins()">💰 Заработать 50 Hamster Coins</button>
-
-  <hr>
 
   <div class="ads">
     <h3>🔷 Реклама от Госуслуг</h3>
@@ -139,21 +103,12 @@
     <p>Съешь таблетку — и Windows перестанет ругаться на принтер.</p>
   </div>
 
-  <div class="reviews">
-    <h3>📢 Отзывы пользователей:</h3>
-    <p>🧔 «После установки этого антивируса моя мама теперь уважает меня!»</p>
-    <p>👩 «Удалило Windows, но вирусов больше нет!»</p>
-    <p>🧠 «UltraMegaАнтивирус™ 9000 — это как Чебурашка, только с лицензией!»</p>
-    <p>🤖 «Этот сайт заменил мне психотерапевта и Битдефендер одновременно.»</p>
-  </div>
-
   <div class="footer">
     © 2025 UltraMegaАнтивирус™. Сделано в подвале. Все права налево.
   </div>
 
   <script>
     let clicksRemaining = 20;
-    let coinCount = 500;
 
     function handleDownloadClick() {
       clicksRemaining--;
@@ -181,57 +136,45 @@
 
     function startScan() {
       const result = document.getElementById("result");
-      result.innerHTML = "🔍 Сканирование запущено...<br>";
-      const files = [
-        "C:/System32/memz.exe", "C:/Users/You/Downloads/fake_cheat.exe", 
-        "C:/Games/TLauncher/DefinitelyNotVirus.exe", 
-        "C:/Windows/System32/explorer.exe", 
-        "C:/Windows/System32/lsass.exe"
+      result.innerHTML = "🔍 Сканирование началось...<br><br>";
+
+      const scanModes = [
+        "🧠 Deep Neuro Scan",
+        "🚀 Quantum Pulse Scan",
+        "📡 ГосРадар v3.9",
+        "🛰️ Астрофизическая инспекция",
+        "🕵️‍♂️ Анализ через Госуслуги",
+        "📀 Legacy BIOS Sweep",
+        "💉 Антивирусная вакцинация"
       ];
+
+      const threats = [
+        "memz.exe", "trojan69.dll", "FSB_Logger.sys", "GrandmaHacker.bat",
+        "KazikInject.dll", "SteamHackProV9.exe", "usb_burner.sys", "justavibe.mp3",
+        "🧣smeshnyafkasfx.exe", "gpt_floodbot.ps1", "RussianMiningRAT.vbs",
+        "invisible_virus.scr", "govsync.dll", "TikTokStealer.jar", "FunnyRat.keylogger"
+      ];
+
+      const scanMode = scanModes[Math.floor(Math.random() * scanModes.length)];
+      result.innerHTML += `⚙️ Режим сканирования: <strong>${scanMode}</strong><br><br>`;
+
       let i = 0;
+      const maxThreats = 7 + Math.floor(Math.random() * 5);
+
       const interval = setInterval(() => {
-        if (i < files.length) {
-          result.innerHTML += `📂 Проверка: ${files[i]}<br>💥 Угроза нейтрализована!<br>`;
+        if (i < maxThreats) {
+          const randomThreat = threats[Math.floor(Math.random() * threats.length)];
+          const fakePath = `C:/System32/${randomThreat}`;
+          const boost = Math.floor(Math.random() * 20) + 5;
+
+          result.innerHTML += `📂 Обнаружено: <span style="color:red">${fakePath}</span><br>`;
+          result.innerHTML += `🧯 Нейтрализация выполнена! Защита усилена на <b>+${boost}%</b><br><br>`;
           i++;
-          result.scrollTop = result.scrollHeight;
         } else {
           clearInterval(interval);
-          result.innerHTML += "<br><strong>✅ Скан завершён. Вирусы удалены, но ты всё равно странный...</strong>";
+          result.innerHTML += "<strong>📅 Скан завершён. Все угрозы обезврежены! Ваш пк готов к бою!</strong>";
         }
-      }, 600);
-    }
-
-    function generateKey() {
-      if (coinCount < 100) {
-        alert("Недостаточно Hamster Coins! Заработай ещё.");
-        return;
-      }
-      coinCount -= 100;
-      document.getElementById('coinCount').innerText = coinCount;
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      function randomBlock() {
-        let block = "";
-        for(let i=0;i<4;i++) {
-          block += chars.charAt(Math.floor(Math.random()*chars.length));
-        }
-        return block;
-      }
-      const licenseKey = `${randomBlock()}-${randomBlock()}-${randomBlock()}-${randomBlock()}`;
-      document.getElementById('keyDisplay').innerText = `Ваш ключ: ${licenseKey}\nСпасибо за покупку!`;
-    }
-
-    function earnCoins() {
-      coinCount += 50;
-      document.getElementById('coinCount').innerText = coinCount;
-      alert("Ты заработал 50 Hamster Coins! Продолжай в том же духе 🐹");
-    }
-
-    function checkUploadedFile(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const uploadResult = document.getElementById("uploadResult");
-        uploadResult.innerText = `Файл "${file.name}" содержит 999 угроз. Удаление началось...`;
-      }
+      }, 800);
     }
   </script>
 </body>
