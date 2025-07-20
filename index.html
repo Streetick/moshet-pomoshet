@@ -3,179 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <title>UltraMegaАнтивирус™ 9000</title>
-  <style id="main-style">
+  <style>
     body {
       background-color: #000;
       color: #0f0;
-      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-family: "Comic Sans MS", cursive;
       text-align: center;
-      padding: 30px;
+      padding: 20px;
     }
-
     h1 {
       font-size: 3em;
       animation: flicker 1.5s infinite;
-      color: #ff0000;
+      color: red;
     }
-
-    .virus-scan, .download-btn, .meem-btn {
+    button {
       background-color: yellow;
-      color: black;
+      border: 3px solid red;
       font-weight: bold;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border: 5px double red;
+      padding: 10px 20px;
+      margin: 10px;
       cursor: pointer;
-      margin-top: 20px;
     }
-
-    .scan-result {
-      margin-top: 30px;
-      font-size: 1.2em;
-      color: lime;
-    }
-
-    .ads {
-      background-color: #111;
-      border: 2px dashed #0f0;
-      padding: 15px;
-      margin: 20px auto;
-      max-width: 600px;
-      font-size: 1em;
-    }
-
-    .ads h3 {
-      color: cyan;
-    }
-
-    .footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: gray;
-    }
-
+    .hidden { display: none; }
+    #scanResult, #meemZone { margin-top: 20px; }
     @keyframes flicker {
       0%, 100% {opacity: 1;}
-      50% {opacity: 0.3;}
+      50% {opacity: 0.4;}
     }
-
-    .hidden {
-      display: none;
+    .ads, .reviews {
+      background: #111;
+      border: 2px dashed #0f0;
+      margin: 10px auto;
+      max-width: 600px;
+      padding: 10px;
+    }
+    input[type="file"] {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>🛡️ UltraMegaАнтивирус™ 9000 🛡️</h1>
-  <p><strong>Лицензировано ФСБ, Минцифры и РАНДом.</strong></p>
 
-  <button class="virus-scan" onclick="startScan()">СКАНИРОВАТЬ ПРЯМО СЕЙЧАС!</button>
-  <div class="scan-result" id="result"></div>
+  <h1>🛡️ UltraMegaАнтивирус™ 9000</h1>
+  <p><strong>Лицензировано ФСБ, Минцифры и РАНДом</strong></p>
+
+  <p>🐹 Hamster Coins: <span id="coinCount">0</span></p>
+  <button onclick="earnCoins()">💰 Заработать 5 монет</button>
+  <button onclick="generateKey()">🔑 Получить лицензионный ключ (30 монет)</button>
+  <p id="keyDisplay" class="hidden"></p>
 
   <hr>
 
-  <h2>🯨 Защищённый файл отчёта</h2>
-  <button class="download-btn" onclick="handleDownloadClick()">🔐 Скачать UltraMegaAntivirus-ru-9000</button>
-  <p>Кликов до открытия: <span id="clickCounter">20</span></p>
-  <a id="downloadLink" class="hidden" href="UltraMegaAntivirus_9000.exe" download>Скачать</a>
+  <h2>🦠 Сканирование системы</h2>
+  <button onclick="startScan('быстрое')">Быстрое сканирование</button>
+  <button onclick="startScan('глубокое')">Глубокое сканирование</button>
+  <button onclick="startScan('режим ФСБ')">Режим ФСБ</button>
+  <div id="scanResult"></div>
+
+  <hr>
+
+  <h2>📁 Проверить свой файл</h2>
+  <input type="file" onchange="scanUploadedFile(this)">
+  <p id="fileScanResult"></p>
+
+  <hr>
+
+  <h2>🔐 Скачать UltraMegaАнтивирус™</h2>
+  <button onclick="tryDownload()">⬇️ Скачать</button>
+  <a id="downloadLink" class="hidden" href="UltraMegaAntivirus_9000installer.exe" download>Скачать UltraMegaAntivirus.exe</a>
+  <p id="downloadStatus"></p>
 
   <hr>
 
   <h2>🔥 MEEM Режим</h2>
-  <button class="meem-btn" onclick="activateMeemMode()">🌰 ВКЛЮЧИТЬ MEEM РЕЖИМ</button>
+  <button onclick="activateMeemMode()">🎰 ВКЛЮЧИТЬ MEEM РЕЖИМ</button>
   <div id="meemZone" class="hidden">
-    <p style="font-size:2em; color: red;">💸 100% ВЫИГРЫШ В КАЗИНО! ЖМИ! 💸</p>
-    <p style="font-size:1.5em; color: yellow;">🥇 Успей забрать подарок от UltraMegaCoin!</p>
-    <p style="font-size:1.2em; color: lime;">🎮 Геймер? Забери RTX4090, просто регистрируйся 999 раз!</p>
+    <p style="font-size:2em; color:red;">💸 ВЫЙГРАЙ МИЛЛИОН УЖЕ СЕГОДНЯ</p>
+    <p style="color:yellow;">🥇 Только сегодня RTX 4090 за регистрацию в ГосАнтивирусе!</p>
   </div>
 
-  <div class="ads">
-    <h3>🔷 Реклама от Госуслуг</h3>
-    <p>Теперь для входа в BIOS нужен <strong>Госключ!</strong></p>
-  </div>
+  <hr>
 
   <div class="ads">
     <h3>⚖️ Законодательство РФ</h3>
-    <p>Согласно статье 146.0 УК РФ, вирус в системе — это тюремный срок или TikTok-бан.</p>
+    <p>По закону вирус — это 8 лет без TikTok.</p>
   </div>
 
   <div class="ads">
-    <h3>💊 Антивирус в таблетках</h3>
-    <p>Съешь таблетку — и Windows перестанет ругаться на принтер.</p>
+    <h3>📎 Госуслуги</h3>
+    <p>Теперь для установки драйвера нужен Госключ!</p>
   </div>
 
-  <div class="footer">
-    © 2025 UltraMegaАнтивирус™. Сделано в подвале. Все права налево.
+  <div class="reviews">
+    <h3>🧑‍💻 Отзывы</h3>
+    <p>“После установки антивируса Windows ожила и начала разговаривать.” — Баба Валя</p>
+    <p>“Удалил Windows, вирусов не стало.” — Хомяк1337</p>
+    <p>“Купил ключ, теперь у меня 3 лицензии и одна дача.” — Иван.рф</p>
   </div>
 
   <script>
-    let clicksRemaining = 20;
+    let coinCount = 0;
+    let hasKey = false;
 
-    function handleDownloadClick() {
-      clicksRemaining--;
-      document.getElementById('clickCounter').innerText = clicksRemaining;
-      if (clicksRemaining <= 0) {
-        document.getElementById('downloadLink').classList.remove('hidden');
+    function earnCoins() {
+      coinCount += 5;
+      document.getElementById('coinCount').innerText = coinCount;
+    }
+
+    function generateKey() {
+      if (coinCount < 30) {
+        alert("Недостаточно Hamster Coins!");
+        return;
       }
+      coinCount -= 30;
+      hasKey = true;
+      const key = "UMAV-" + Math.random().toString(36).substr(2, 5).toUpperCase() + "-" + Date.now().toString().slice(-5);
+      document.getElementById('coinCount').innerText = coinCount;
+      document.getElementById('keyDisplay').innerText = "🔑 Ваш ключ: " + key;
+      document.getElementById('keyDisplay').classList.remove('hidden');
+    }
+
+    function tryDownload() {
+      if (!hasKey) {
+        document.getElementById('downloadStatus').innerText = "🚫 Нужен лицензионный ключ!";
+        return;
+      }
+      document.getElementById('downloadLink').click();
+      document.getElementById('downloadStatus').innerText = "✅ Скачивание началось!";
     }
 
     function activateMeemMode() {
       const meemZone = document.getElementById('meemZone');
       meemZone.classList.remove('hidden');
-
-      let colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"];
+      let colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff"];
       let interval = setInterval(() => {
         document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         document.body.style.color = colors[Math.floor(Math.random() * colors.length)];
       }, 100);
-
       setTimeout(() => {
         clearInterval(interval);
-        alert("😵 Вы слишком долго были в MEEM режиме. Ваш компьютер официально стал мемом.");
-      }, 10000);
+        alert("🧠 Ваш мозг официально стал мемом.");
+      }, 8000);
     }
 
-    function startScan() {
-      const result = document.getElementById("result");
-      result.innerHTML = "🔍 Сканирование началось...<br><br>";
-
-      const scanModes = [
-        "🧠 Deep Neuro Scan",
-        "🚀 Quantum Pulse Scan",
-        "📡 ГосРадар v3.9",
-        "🛰️ Астрофизическая инспекция",
-        "🕵️‍♂️ Анализ через Госуслуги",
-        "📀 Legacy BIOS Sweep",
-        "💉 Антивирусная вакцинация"
-      ];
-
+    function startScan(mode) {
+      const result = document.getElementById("scanResult");
       const threats = [
-        "memz.exe", "trojan69.dll", "FSB_Logger.sys", "GrandmaHacker.bat",
-        "KazikInject.dll", "SteamHackProV9.exe", "usb_burner.sys", "justavibe.mp3",
-        "🧣smeshnyafkasfx.exe", "gpt_floodbot.ps1", "RussianMiningRAT.vbs",
-        "invisible_virus.scr", "govsync.dll", "TikTokStealer.jar", "FunnyRat.keylogger"
+        "memz.exe", "TLauncher.jar", "explorer.exe", "system32/hack.dll", "notavirus.bat",
+        "robloxcheat.exe", "gta_crack.iso", "registry/hkey_lol", "winlogon.exe"
       ];
-
-      const scanMode = scanModes[Math.floor(Math.random() * scanModes.length)];
-      result.innerHTML += `⚙️ Режим сканирования: <strong>${scanMode}</strong><br><br>`;
-
+      result.innerHTML = `🧪 ${mode} сканирование началось...<br>`;
       let i = 0;
-      const maxThreats = 7 + Math.floor(Math.random() * 5);
-
       const interval = setInterval(() => {
-        if (i < maxThreats) {
-          const randomThreat = threats[Math.floor(Math.random() * threats.length)];
-          const fakePath = `C:/System32/${randomThreat}`;
-          const boost = Math.floor(Math.random() * 20) + 5;
-
-          result.innerHTML += `📂 Обнаружено: <span style="color:red">${fakePath}</span><br>`;
-          result.innerHTML += `🧯 Нейтрализация выполнена! Защита усилена на <b>+${boost}%</b><br><br>`;
+        if (i < threats.length) {
+          result.innerHTML += `📂 Проверка: ${threats[i]}<br>💥 Угроза нейтрализована!<br>`;
           i++;
         } else {
           clearInterval(interval);
-          result.innerHTML += "<strong>📅 Скан завершён. Все угрозы обезврежены! Ваш пк готов к бою!</strong>";
+          result.innerHTML += "<br>✅ Все угрозы ликвидированы, система теперь святее папы Римского.";
         }
-      }, 800);
+      }, 500);
+    }
+
+    function scanUploadedFile(input) {
+      if (input.files.length === 0) return;
+      const file = input.files[0];
+      document.getElementById("fileScanResult").innerHTML =
+        `📂 Сканирование файла: ${file.name}<br>❌ Обнаружено 999+ угроз!<br>💣 Рекомендуется удалить всё!`;
     }
   </script>
+
 </body>
 </html>
