@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>UltraMegaАнтивирус™ 9000</title>
+  <style id="main-style">
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 3em;
+      animation: flicker 1.5s infinite;
+      color: #ff0000;
+    }
+
+    .virus-scan, .download-btn, .meem-btn {
+      background-color: yellow;
+      color: black;
+      font-weight: bold;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: 5px double red;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .scan-result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: lime;
+    }
+
+    .ads {
+      background-color: #111;
+      border: 2px dashed #0f0;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 600px;
+      font-size: 1em;
+    }
+
+    .ads h3 {
+      color: cyan;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    @keyframes flicker {
+      0%, 100% {opacity: 1;}
+      50% {opacity: 0.3;}
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛡️ UltraMegaАнтивирус™ 9000 🛡️</h1>
+  <p><strong>Лицензировано ФСБ, Минцифры и РАНДом.</strong></p>
+
+  <button class="virus-scan" onclick="startScan()">СКАНИРОВАТЬ ПРЯМО СЕЙЧАС!</button>
+  <div class="scan-result" id="result"></div>
+
+  <hr>
+
+  <h2>🧨 Защищённый файл отчёта</h2>
+  <button class="download-btn" onclick="handleDownloadClick()">🔐 Скачать UltraMegaAntivirus-ru-9000</button>
+  <p>Кликов до открытия: <span id="clickCounter">20</span></p>
+  <a id="downloadLink" class="hidden" href="UltraMegaAntivirus_9000installer.exe" download>Скачать</a>
+
+  <hr>
+
+  <h2>🔥 MEEM Режим</h2>
+  <button class="meem-btn" onclick="activateMeemMode()">🎰 ВКЛЮЧИТЬ MEEM РЕЖИМ</button>
+  <div id="meemZone" class="hidden">
+    <p style="font-size:2em; color: red;">💸 100% ВЫИГРЫШ В КАЗИНО! ЖМИ! 💸</p>
+    <p style="font-size:1.5em; color: yellow;">🥇 Успей забрать подарок от UltraMegaCoin!</p>
+    <p style="font-size:1.2em; color: lime;">🎮 Геймер? Забери RTX4090, просто зарегистрируйся 999 раз!</p>
+  </div>
+
+  <div class="ads">
+    <h3>🔷 Реклама от Госуслуг</h3>
+    <p>Теперь для входа в BIOS нужен <strong>Госключ!</strong></p>
+  </div>
+
+  <div class="ads">
+    <h3>⚖️ Законодательство РФ</h3>
+    <p>Согласно статье 146.0 УК РФ, вирус в системе — это тюремный срок или TikTok-бан.</p>
+  </div>
+
+  <div class="ads">
+    <h3>💊 Антивирус в таблетках</h3>
+    <p>Съешь таблетку — и Windows перестанет ругаться на принтер.</p>
+  </div>
+
+  <div class="footer">
+    © 2025 UltraMegaАнтивирус™. Сделано в подвале. Все права налево.
+  </div>
+
+  <script>
+    let clicksRemaining = 20;
+
+    function handleDownloadClick() {
+      clicksRemaining--;
+      document.getElementById('clickCounter').innerText = clicksRemaining;
+      if (clicksRemaining <= 0) {
+        document.getElementById('downloadLink').classList.remove('hidden');
+      }
+    }
+
+    function activateMeemMode() {
+      const meemZone = document.getElementById('meemZone');
+      meemZone.classList.remove('hidden');
+
+      let colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"];
+      let interval = setInterval(() => {
+        document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.color = colors[Math.floor(Math.random() * colors.length)];
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        alert("😵 Вы слишком долго были в MEEM режиме. Ваш компьютер официально стал мемом.");
+      }, 10000);
+    }
+
+    function startScan() {
+      const result = document.getElementById("result");
+      result.innerHTML = "🔍 Сканирование запущено...<br>";
+      const files = [
+        "C:/System32/memz.exe", "C:/Users/You/Downloads/fake_cheat.exe", 
+        "C:/Games/TLauncher/DefinitelyNotVirus.exe", 
+        "C:/Windows/System32/explorer.exe", 
+        "C:/Windows/System32/lsass.exe"
+      ];
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < files.length) {
+          result.innerHTML += `📂 Проверка: ${files[i]}<br>💥 Угроза нейтрализована!<br>`;
+          i++;
+          result.scrollTop = result.scrollHeight;
+        } else {
+          clearInterval(interval);
+          result.innerHTML += "<br><strong>✅ Скан завершён. Вирусы удалены, но ты всё равно странный...</strong>";
+        }
+      }, 600);
+    }
+  </script>
+</body>
+</html>
